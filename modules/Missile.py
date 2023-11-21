@@ -45,11 +45,12 @@ class Missile:
         if reload and self.missile.ycor() >= 240:
             return True
 
-    def move_missile(self):
+    def move_missile(self, game_level):
+
         self.missile.showturtle()
 
         missile_ycor = self.missile.ycor()
-        missile_ycor += 15
+        missile_ycor += game_level["missile_speed"]
 
         self.missile.sety(missile_ycor)
 

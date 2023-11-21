@@ -72,7 +72,7 @@ game_over = Game_over(turtle=turtle, window=window, time=time)
 while True:
 
     if control_missile.check_missile_position(moviment=True) and control_missile.check_missile_status():
-        control_missile.move_missile()
+        control_missile.move_missile(game_level=game_level)
 
     elif control_missile.check_missile_position(reload=True):
         control_missile.reload_missile()
