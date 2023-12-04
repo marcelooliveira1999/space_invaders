@@ -43,6 +43,10 @@ shoot_missile = control_missile.shoot_missile
 invaders = Invaders(turtle=turtle, random=random, game_level=game_level)
 invaders_arr = invaders.create_invader()
 
+laser_invaders_control = Laser(turtle=turtle)
+laser_invaders = laser_invaders_control.shoot_laser_method("yellow", 0.5)
+laser_invaders_state = "ready"
+
 score = Score(turtle=turtle)
 score_pen = score.start_score()
 
@@ -59,7 +63,7 @@ if game_level["level"] == "hard":
     hp_boss = create_boss.hp_boss()
 
     laser_control = Laser(turtle=turtle)
-    laser = laser_control.shoot_laser_method()
+    laser = laser_control.shoot_laser_method("black", 0.75)
 
     shoot_laser_status = "ready"
 
@@ -101,9 +105,29 @@ while True:
             new_player.hideturtle()
             game_over.lose()
 
+        laser_invaders_control.move_laser(laser=laser_invaders, speed=10)
+        if laser_invaders.ycor() <= 250 and laser_invaders_state == "ready":
+            laser_invaders_control.setposition_laser_invaders(laser=laser_invaders, invaders_arr=invaders_arr, random=random)
+            laser_invaders_state = "fire"
+        
+        if laser_invaders.ycor() <= -240:
+            laser_invaders_control.reset_laser(laser=laser_invaders)
+            laser_invaders_state = "ready"
+            
+        laser_invaders_position = rules.calculate_position(element=laser_invaders)
+        if rules.is_collision(first_element=player_position, second_element=laser_invaders_position,sensibility=20):
+            sounds.play_sound("game_over")
+
+            new_player.hideturtle()
+            laser_invaders.hideturtle()
+
+            game_over.lose()
+
+
+
     if boss_exists:
         create_boss.move_boss(boss=boss)
-        laser_control.move_laser(laser=laser)
+        laser_control.move_laser(laser=laser, speed=40)
 
         if laser.ycor() < 240 and shoot_laser_status == "ready":
             laser_control.show_laser(laser=laser, boss=boss)

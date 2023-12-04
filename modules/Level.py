@@ -3,15 +3,15 @@ class Level:
 
     level_easy = {
         "level": "easy",
-        "amount_invaders": 5,
+        "amount_invaders": 4,
         "invaders_movement": 4,
         "advance_of_the_invaders": 30,
-        "missile_speed": 20
+        "missile_speed": 25
     }
 
     level_normal = {
         "level": "normal",
-        "amount_invaders": 7,
+        "amount_invaders": 6,
         "invaders_movement": 6,
         "advance_of_the_invaders": 35,
         "missile_speed": 25
@@ -19,7 +19,7 @@ class Level:
 
     level_hard = {
         "level": "hard",
-        "amount_invaders": 5,
+        "amount_invaders": 4,
         "invaders_movement": 8,
         "advance_of_the_invaders": 40,
         "missile_speed": 25

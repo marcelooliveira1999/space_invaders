@@ -3,7 +3,7 @@ class Laser:
     def __init__(self, turtle) -> None:
         self.turtle = turtle
 
-    def shoot_laser_method(self):
+    def shoot_laser_method(self, color, shapesize):
         laser = self.turtle.Turtle()
         laser.hideturtle()
 
@@ -11,8 +11,8 @@ class Laser:
         laser.speed(0)
 
         laser.shape("circle")
-        laser.shapesize(0.75)
-        laser.color("black")
+        laser.shapesize(shapesize)
+        laser.color(color)
 
         laser_xcor = 0
         laser_ycor = 700
@@ -21,9 +21,9 @@ class Laser:
 
         return laser
 
-    def move_laser(self, laser):
+    def move_laser(self, laser, speed):
         laser_ycor = laser.ycor()
-        laser_ycor -= 40
+        laser_ycor -= speed
 
         laser.sety(laser_ycor)
 
@@ -36,3 +36,13 @@ class Laser:
     def reset_laser(self, laser):
         laser.hideturtle()
         laser.sety(350)
+
+    def setposition_laser_invaders(self,laser, invaders_arr, random):
+        invader = random.choice(invaders_arr)
+        
+        laser_xcor = invader.xcor()
+        laser_ycor = invader.ycor()
+        laser_ycor -= 20
+
+        laser.setposition(laser_xcor,laser_ycor)
+        laser.showturtle()
